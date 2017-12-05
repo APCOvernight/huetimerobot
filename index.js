@@ -50,7 +50,7 @@ class HueTimeRobot extends BaseModule {
   async _pollUptime () {
     const monitors = await this.robot.getMonitors()
     const failing = []
-    const building = []
+    const working = []
 
     if (!monitors.length) {
       return this._warning()
@@ -60,7 +60,7 @@ class HueTimeRobot extends BaseModule {
       const status = parseInt(monitor.status)
 
       if (status === 1) {
-        building.push(monitor.friendlyName)
+        working.push(monitor.friendlyName)
       }
 
       if (status > 2) {
@@ -72,8 +72,8 @@ class HueTimeRobot extends BaseModule {
       return this._alert(failing)
     }
 
-    if (building.length) {
-      return this._building(building)
+    if (working.length) {
+      return this._working(working)
     }
 
     return this._ok()
@@ -102,9 +102,9 @@ class HueTimeRobot extends BaseModule {
    * @param  {Array.String}  monitorNames Name of issue to report on
    * @return {Promise}
    */
-  async _building (monitorNames) {
+  async _working (monitorNames) {
     monitorNames = monitorNames.join(', ')
-    await this.change('building', `${monitorNames} monitor(s) not checked yet`)
+    await this.change('working', `${monitorNames} monitor(s) not checked yet`)
   }
 
   /**

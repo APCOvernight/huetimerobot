@@ -93,7 +93,7 @@ describe('HueTimeRobot Class', function () {
     changeStub.restore()
   })
 
-  it('It should set status to building if there are monitors not checked', async () => {
+  it('It should set status to working if there are monitors not checked', async () => {
     const hueTimeRobot = new HueTimeRobot(mockConfig, {})
     hueTimeRobot._setUpConfig()
     sentryStub = sinon.stub(hueTimeRobot.robot, 'getMonitors').resolves([{ friendlyName: 'My Monitor', status: '2' }, { friendlyName: 'Another Monitor', status: '1' }])
@@ -102,7 +102,7 @@ describe('HueTimeRobot Class', function () {
     await hueTimeRobot._pollUptime()
 
     expect(sentryStub).to.be.calledWith()
-    expect(changeStub).to.be.calledWith('building', 'Another Monitor monitor(s) not checked yet')
+    expect(changeStub).to.be.calledWith('working', 'Another Monitor monitor(s) not checked yet')
 
     sentryStub.restore()
     changeStub.restore()
