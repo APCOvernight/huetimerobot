@@ -8,7 +8,7 @@ try {
 
 const Robot = require('uptime-robot')
 
-class HueTry extends BaseModule {
+class HueTimeRobot extends BaseModule {
   /**
    * Generate instance name based on project and organisation
    * @return {String} [description]
@@ -116,4 +116,4 @@ class HueTry extends BaseModule {
   }
 }
 
-module.exports = HueTry
+module.exports = HueTimeRobot
