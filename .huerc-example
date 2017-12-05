@@ -1,0 +1,6 @@
+{
+  "name": "huetimerobot",
+  "light": "Hue color lamp 1",
+  "uptimeRobotApiKey": "u484042-c7c6d8d10f46d6c375348d07",
+  "pollInterval": 5000
+}
