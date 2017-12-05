@@ -1,29 +1,31 @@
-# HueTry
+# HueTimeRobot
 
-[![NPM Package](https://img.shields.io/npm/v/huetry.svg?maxAge=2592000)](https://npmjs.com/package/huetry) ![License](https://img.shields.io/npm/l/huetry.svg) [![Build Status](https://travis-ci.org/APCOvernight/huetry.svg?branch=master)](https://travis-ci.org/APCOvernight/huetry) [![Coverage Status](https://coveralls.io/repos/github/APCOvernight/huetry/badge.svg?branch=master)](https://coveralls.io/github/APCOvernight/huetry?branch=master) [![Maintainability](	https://img.shields.io/codeclimate/maintainability/APCOvernight/huetry.svg)](https://codeclimate.com/github/APCOvernight/huetry/maintainability) 
-[![Dependencies](https://img.shields.io/david/APCOvernight/huetry.svg)](https://david-dm.org/APCOvernight/huetry) [![Greenkeeper badge](https://badges.greenkeeper.io/APCOvernight/huetry.svg)](https://greenkeeper.io/)
+[![NPM Package](https://img.shields.io/npm/v/huetimerobot.svg?maxAge=2592000)](https://npmjs.com/package/huetimerobot) ![License](https://img.shields.io/npm/l/huetimerobot.svg) [![Build Status](https://travis-ci.org/APCOvernight/huetimerobot.svg?branch=master)](https://travis-ci.org/APCOvernight/huetimerobot) [![Coverage Status](https://coveralls.io/repos/github/APCOvernight/huetimerobot/badge.svg?branch=master)](https://coveralls.io/github/APCOvernight/huetimerobot?branch=master) [![Maintainability](	https://img.shields.io/codeclimate/maintainability/APCOvernight/huetimerobot.svg)](https://codeclimate.com/github/APCOvernight/huetimerobot/maintainability) 
+[![Dependencies](https://img.shields.io/david/APCOvernight/huetimerobot.svg)](https://david-dm.org/APCOvernight/huetimerobot) [![Greenkeeper badge](https://badges.greenkeeper.io/APCOvernight/huetimerobot.svg)](https://greenkeeper.io/)
 
 Sentry reporter for HueStatus
 
 ## Features
-- Set your Hue light to "alert" when an unresolved and unassigned issue is found on Sentry.
-- Then back to "Ok" when issues are assigned or resolved.
+- Add individual monitors (by unique api key) or add all
+- Set your Hue light to "alert" when a monitor is down.
+- Set your Hue light to "building" when a monitor is not yet checked.
+- Set your Hue light to "warning" when no monitors are found.
+- Set your Hue light to "ok" when all monitors are up.
 
 ## Installation
 
 ```
-npm install -g huestatus huetry
+npm install -g huestatus huetimerobot
 ```
 
 Create a .huerc file on your home directory, see [HueStatus Docs](https://www.npmjs.com/package/huestatus) for more info. Add an object like this to the modules array for each of the projects you want to monitor:
 
 ```js
 {
-  "name": "huetry", // Required to tell HueStatus to load this module
+  "name": "huetimerobot", // Required to tell HueStatus to load this module
   "light": "Hue color lamp 2", // Which Hue light to use
-  "sentryApiKey": "3abxxxxxxxxxxxxxxxxx0f5", // Your sentry API key. You will need Project Read and Event Read priveleges
-  "project": "", // Project Slug
-  "organisation": "" // Organisation slug
+  "uptimeRobotApiKey": "u1231414-12412414145525", // Your Uptime Robot API key. Can be an account or individual monitor api key
+  "pollInterval": 2000 // Polling interval in milliseconds
 }
 
 ```
