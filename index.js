@@ -73,11 +73,11 @@ class HueTimeRobot extends BaseModule {
     })
 
     if (failing.length) {
-      return this._alert(failing)
+      return this.change('alert', `${failing.join(', ')} monitor(s) down`)
     }
 
     if (working.length) {
-      return this._working(working)
+      return this.change('working', `${working.join(', ')} monitor(s) not checked yet`)
     }
 
     return this._ok()
@@ -89,26 +89,6 @@ class HueTimeRobot extends BaseModule {
    */
   async _ok () {
     return this.change('ok', `${this.config.uptimeRobotApiKey[0] === 'm' ? 'Monitor' : 'All monitors'} up`)
-  }
-
-  /**
-   * Set the status to alert and log the number of issues
-   * @param  {Array.String}  monitorNames Name of issue to report on
-   * @return {Promise}
-   */
-  async _alert (monitorNames) {
-    monitorNames = monitorNames.join(', ')
-    return this.change('alert', `${monitorNames} monitor(s) down`)
-  }
-
-  /**
-   * Set the status to alert and log the number of issues
-   * @param  {Array.String}  monitorNames Name of issue to report on
-   * @return {Promise}
-   */
-  async _working (monitorNames) {
-    monitorNames = monitorNames.join(', ')
-    return this.change('working', `${monitorNames} monitor(s) not checked yet`)
   }
 
   /**
