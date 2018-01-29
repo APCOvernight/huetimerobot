@@ -8,6 +8,10 @@ try {
 
 const Robot = require('uptime-robot')
 
+/**
+ * HueStatus Module
+ * @extends BaseModule
+ */
 class HueTimeRobot extends BaseModule {
   /**
    * Generate instance name based on project and organisation
@@ -69,11 +73,11 @@ class HueTimeRobot extends BaseModule {
     })
 
     if (failing.length) {
-      return this._alert(failing)
+      return this.change('alert', `${failing.join(', ')} monitor(s) down`)
     }
 
     if (working.length) {
-      return this._working(working)
+      return this.change('working', `${working.join(', ')} monitor(s) not checked yet`)
     }
 
     return this._ok()
@@ -84,27 +88,7 @@ class HueTimeRobot extends BaseModule {
    * @return {Promise}
    */
   async _ok () {
-    await this.change('ok', `${this.config.uptimeRobotApiKey[0] === 'm' ? 'Monitor' : 'All monitors'} up`)
-  }
-
-  /**
-   * Set the status to alert and log the number of issues
-   * @param  {Array.String}  monitorNames Name of issue to report on
-   * @return {Promise}
-   */
-  async _alert (monitorNames) {
-    monitorNames = monitorNames.join(', ')
-    await this.change('alert', `${monitorNames} monitor(s) down`)
-  }
-
-  /**
-   * Set the status to alert and log the number of issues
-   * @param  {Array.String}  monitorNames Name of issue to report on
-   * @return {Promise}
-   */
-  async _working (monitorNames) {
-    monitorNames = monitorNames.join(', ')
-    await this.change('working', `${monitorNames} monitor(s) not checked yet`)
+    return this.change('ok', `${this.config.uptimeRobotApiKey[0] === 'm' ? 'Monitor' : 'All monitors'} up`)
   }
 
   /**
@@ -112,7 +96,7 @@ class HueTimeRobot extends BaseModule {
    * @return {Promise}
    */
   async _warning () {
-    await this.change('warning', 'No monitor(s) found')
+    return this.change('warning', 'No monitor(s) found')
   }
 }
 
