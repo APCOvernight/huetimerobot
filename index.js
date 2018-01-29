@@ -8,6 +8,10 @@ try {
 
 const Robot = require('uptime-robot')
 
+/**
+ * HueStatus Module
+ * @extends BaseModule
+ */
 class HueTimeRobot extends BaseModule {
   /**
    * Generate instance name based on project and organisation
@@ -84,7 +88,7 @@ class HueTimeRobot extends BaseModule {
    * @return {Promise}
    */
   async _ok () {
-    await this.change('ok', `${this.config.uptimeRobotApiKey[0] === 'm' ? 'Monitor' : 'All monitors'} up`)
+    return this.change('ok', `${this.config.uptimeRobotApiKey[0] === 'm' ? 'Monitor' : 'All monitors'} up`)
   }
 
   /**
@@ -94,7 +98,7 @@ class HueTimeRobot extends BaseModule {
    */
   async _alert (monitorNames) {
     monitorNames = monitorNames.join(', ')
-    await this.change('alert', `${monitorNames} monitor(s) down`)
+    return this.change('alert', `${monitorNames} monitor(s) down`)
   }
 
   /**
@@ -104,7 +108,7 @@ class HueTimeRobot extends BaseModule {
    */
   async _working (monitorNames) {
     monitorNames = monitorNames.join(', ')
-    await this.change('working', `${monitorNames} monitor(s) not checked yet`)
+    return this.change('working', `${monitorNames} monitor(s) not checked yet`)
   }
 
   /**
@@ -112,7 +116,7 @@ class HueTimeRobot extends BaseModule {
    * @return {Promise}
    */
   async _warning () {
-    await this.change('warning', 'No monitor(s) found')
+    return this.change('warning', 'No monitor(s) found')
   }
 }
 
